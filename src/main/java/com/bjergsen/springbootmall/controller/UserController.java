@@ -33,5 +33,6 @@ public class UserController {
         User user = userService.login(userLoginRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body(user);
+
     }
 }
