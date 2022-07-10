@@ -1,6 +1,7 @@
 package com.bjergsen.springbootmall.controller;
 
 import com.bjergsen.springbootmall.dto.CreateOrderRequest;
+import com.bjergsen.springbootmall.model.Order;
 import com.bjergsen.springbootmall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +21,14 @@ public class OrderController {
 
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
-                                         @RequestBody @Valid CreateOrderRequest createOrderRequest){
+                                         @RequestBody @Valid CreateOrderRequest createOrderRequest) {
 
-        Integer orderId =orderService.createOrder(userId,createOrderRequest);
+        Integer orderId = orderService.createOrder(userId, createOrderRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        Order order = orderService.getOrderById(orderId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
+
+
 }
