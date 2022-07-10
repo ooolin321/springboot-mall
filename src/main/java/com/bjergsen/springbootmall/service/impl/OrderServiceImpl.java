@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer createOrder(Integer userId, CreateOrderRequest createOrderRequest) {
         //檢查 user 是否存在
-        User user = new User();
+        User user = userDao.getUserById(userId);
 
         if (user == null) {
             log.warn("該 userId {}不存在", userId);
